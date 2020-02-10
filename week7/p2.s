@@ -1,5 +1,5 @@
 .data
-  A:.word 15
+  A:.word 16
   B:.ASCIZ "Odd parity"
   C:.ASCIZ "Even parity"
 
@@ -14,12 +14,8 @@
       BNE L   
 
       TST R7, #1
-      BNE OD
-      LDR R0, =C
-      SWI 0x02
-      SWI 0x011
-
-  OD: LDR R0, =B
+      LDRNE R0, =B
+      LDREQ R0, =C
       SWI 0x02
       SWI 0x011
 

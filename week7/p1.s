@@ -1,6 +1,6 @@
 .data
   A:.byte 1,2,3,4,5,6,7,8,9,10
-  B:.byte 4
+  B:.byte 11
   C:.ASCIZ "Found"
   D:.ASCIZ "Not found"
 
@@ -16,8 +16,9 @@
       LDRB R6, [R2]
       CMP R6, R7
       BEQ F
-      BPL G
-      BMI S
+      ADDPL R1, R2, #1
+      SUBMI R3, R2, #1
+      B L
   
   NF: LDR R0, =D
       SWI 0x02
@@ -26,11 +27,5 @@
   F:  LDR R0, =C
       SWI 0x02
       SWI 0x011
-
-  G:  SUB R3, R2, #1
-      B L
-
-  S:  ADD R1, R2, #1
-      B L
 
 .end
